@@ -6,14 +6,14 @@ from warnings import warn
 from box import Box
 from docxtpl import DocxTemplate
 from num2t4ru import num2text
-from config import tasks_folder, templates_folder, contract_number
-from utils import remove_row
+from config import TASKS_FOLDER, TEMPLATES_FOLDER, CONTRACT_NUMBER, CONTRACT_SIGN_AT, PRICE
+from utils import remove_row, month2str
 
 
 def create_order(context: Union[dict, Box]) -> None:
-    doc = DocxTemplate(join(templates_folder, "Order.docx"))
+    doc = DocxTemplate(join(TEMPLATES_FOLDER, "Order.docx"))
 
-    target_folder = join(tasks_folder, context.order_number)
+    target_folder = join(TASKS_FOLDER, context.order_number)
 
     try:
         mkdir(target_folder)
@@ -27,17 +27,20 @@ def create_order(context: Union[dict, Box]) -> None:
 
 if __name__ == '__main__':
     context = Box({"order_number": input("Введите номер ЗН: "),
-                   "contract_number": contract_number,
+                   "contract_number": CONTRACT_NUMBER,
                    "today": datetime.today().strftime("%d.%m.%Y"),
                    "total": 0,
                    "tasks": []})
+    months = ('января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
+              'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря')
+    context.contract_sign_at = CONTRACT_SIGN_AT.strftime(f"%d {month2str(CONTRACT_SIGN_AT.month, months)} %Y г.")
     for _ in range(int(input("Введите количество задач: "))):
         task = Box({
             "task_number": input("Номер задачи: "),
             "start": input("Начало: "),
             "end": input("Конец: "),
             "time": int(input("Время выполнения: ")),
-            "price": 400
+            "price": PRICE
         })
         task.total = task.time * task.price
         context.tasks.append(task)
