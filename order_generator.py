@@ -6,7 +6,7 @@ from warnings import warn
 from box import Box
 from docxtpl import DocxTemplate
 from num2t4ru import num2text
-from config import TASKS_FOLDER, TEMPLATES_FOLDER, CONTRACT_NUMBER, CONTRACT_SIGN_AT, PRICE
+from config import TASKS_FOLDER, TEMPLATES_FOLDER, CONTRACT_NUMBER, CONTRACT_SIGN_AT, PRICE, USERNAME
 from utils import remove_row, month2str
 
 
@@ -30,7 +30,8 @@ if __name__ == '__main__':
                    "contract_number": CONTRACT_NUMBER,
                    "today": datetime.today().strftime("%d.%m.%Y"),
                    "total": 0,
-                   "tasks": []})
+                   "tasks": [],
+                   "username": USERNAME})
     months = ('января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
               'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря')
     context.contract_sign_at = CONTRACT_SIGN_AT.strftime(f"%d {month2str(CONTRACT_SIGN_AT.month, months)} %Y г.")

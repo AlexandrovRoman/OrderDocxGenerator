@@ -2,7 +2,7 @@ import re
 from datetime import datetime
 import docx
 from box import Box
-from config import CONTRACT_SIGN_AT, CONTRACT_NUMBER
+from config import CONTRACT_SIGN_AT, CONTRACT_NUMBER, USERNAME
 
 
 def month2str(month_index: int,
@@ -26,6 +26,7 @@ def get_context_from_docx(filename):
     context.today = today.strftime(date_format.format(month2str(today.month)))
     context.contract_number = CONTRACT_NUMBER
     context.contract_sign_at = CONTRACT_SIGN_AT.strftime(date_format.format(month2str(CONTRACT_SIGN_AT.month)))
+    context.username = USERNAME
 
     tasks = doc.tables[0]
     keys = ("index", "description", "start", "end", "time", "mui", "price", "total")
