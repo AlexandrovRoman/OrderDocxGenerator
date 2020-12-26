@@ -8,7 +8,7 @@ from config import TASKS_FOLDER, TEMPLATES_FOLDER, CONTRACT_NUMBER, CONTRACT_SIG
 from utils import remove_row, month2str, doc2pdf
 
 
-def get_context_from_docx(filename):
+def get_context_from_order(filename):
     context = Box()
     doc = docx.Document(filename)
     date_format = "«%d» {} %Y г."
@@ -36,7 +36,7 @@ def create_act(order_number):
     target_folder = join(TASKS_FOLDER, order_number)
 
     try:
-        context = get_context_from_docx(join(TASKS_FOLDER, order_number, f"ЗН №{order_number}.docx"))
+        context = get_context_from_order(join(TASKS_FOLDER, order_number, f"ЗН №{order_number}.docx"))
         context.order_number = order_number
     except FileNotFoundError:
         print("Заказа с данным номером нет")

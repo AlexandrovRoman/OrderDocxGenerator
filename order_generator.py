@@ -25,7 +25,7 @@ def create_order(context: Union[dict, Box]) -> None:
     filename = f"ЗН №{context.order_number}"
     file_path = join(target_folder, f"{filename}.docx")
     doc.save(file_path)
-    doc2pdf(file_path, join(target_folder, f"{filename}.pdf"))
+    # doc2pdf(file_path, join(target_folder, f"{filename}.pdf"))
 
 
 if __name__ == '__main__':
