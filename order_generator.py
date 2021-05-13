@@ -7,7 +7,7 @@ from box import Box
 from docxtpl import DocxTemplate
 from num2t4ru import num2text
 from config import TASKS_FOLDER, TEMPLATES_FOLDER, CONTRACT_NUMBER, CONTRACT_SIGN_AT, PRICE, USERNAME
-from utils import remove_row, month2str, doc2pdf
+from utils import remove_row, month2str
 
 
 def create_order(context: Union[dict, Box]) -> None:

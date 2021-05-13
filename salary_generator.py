@@ -2,10 +2,8 @@ import itertools
 import os
 import re
 from os.path import join
-
 from config import TASKS_FOLDER
 import docx
-
 import camelot
 
 
