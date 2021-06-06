@@ -2,6 +2,9 @@ import itertools
 import os
 import re
 from os.path import join
+
+from prettytable import PrettyTable
+
 from config import TASKS_FOLDER
 import docx
 import camelot
@@ -51,18 +54,19 @@ def get_salary_amount(act_number: str) -> int:
 
 
 def main():
+    table = PrettyTable()
+    table.field_names = ["ЗН", "Stonks"]
+
     total = 0
-    print('---------------------')
-    print(f'|\tЗН\t|\tStonks\t|')
-    print('---------------------')
     for i in itertools.count(1):
         folder_path = join(TASKS_FOLDER, str(i))
         if not os.path.isdir(folder_path):
             break
         salary = get_salary_amount(str(i))
-        print(f'|\t{i}\t|\t{salary}\t|')
+        table.add_row((i, salary))
         total += salary
-    print('---------------------')
+
+    print(table)
     print(f'Всего заработано: {total} руб')
 
 
