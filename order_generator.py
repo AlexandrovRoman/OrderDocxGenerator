@@ -41,12 +41,12 @@ if __name__ == '__main__':
     for _ in range(int(input("Введите количество задач: "))):
         task = Box({
             "task_number": input("Номер задачи: "),
-            "start": input("Начало: "),
-            "end": input("Конец: "),
-            "time": int(input("Время выполнения: ")),
+            "start": input("Начало: ") or datetime.today().strftime('%d.%m.%Y'),
+            "end": input("Конец: ") or datetime.today().strftime('%d.%m.%Y'),
+            "time": float(input("Время выполнения: ")),
             "price": PRICE
         })
-        task.total = task.time * task.price
+        task.total = int(task.time * task.price)
         context.tasks.append(task)
         context.total += task.total
     context.str_total = num2text(context.total, ((u'рубль', u'рубля', u'рублей'), 'm'))
